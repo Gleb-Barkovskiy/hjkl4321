@@ -16,19 +16,19 @@
            <li>
                <strong>Клонируйте репозиторий</strong>:
                <pre><code>git clone <repository_url>
-   cd hjkl4321</code></pre>
+cd hjkl4321</code></pre>
            </li>
            <li>
                <strong>Настройте виртуальное окружение</strong>:
                <pre><code>python3 -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt</code></pre>
+source venv/bin/activate
+pip install -r requirements.txt</code></pre>
            </li>
            <li>
                <strong>Настройте переменные окружения</strong>:
                <p>Создайте файл <code>.env</code> в корне проекта:</p>
                <pre><code>DATABASE_URL=postgresql://flask_user:secure_password@localhost/flask_app
-   SECRET_KEY=your-secure-secret-key</code></pre>
+SECRET_KEY=your-secure-secret-key</code></pre>
                <p>Генерируйте безопасный <code>SECRET_KEY</code>:</p>
                <pre><code>python -c "import secrets; print(secrets.token_hex(16))"</code></pre>
                <p>Убедитесь, что <code>.env</code> добавлен в <code>.gitignore</code>.</p>
@@ -36,16 +36,16 @@
            <li>
                <strong>Настройте PostgreSQL</strong>:
                <pre><code>sudo -u postgres psql
-   CREATE DATABASE flask_app;
-   CREATE USER flask_user WITH PASSWORD 'secure_password';
-   ALTER ROLE flask_user SET client_encoding TO 'utf8';
-   ALTER ROLE flask_user SET default_transaction_isolation TO 'read committed';
-   ALTER ROLE flask_user SET timezone TO 'UTC';
-   GRANT ALL PRIVILEGES ON DATABASE flask_app TO flask_user;
-   \c flask_app
-   GRANT USAGE ON SCHEMA public TO flask_user;
-   GRANT CREATE ON SCHEMA public TO flask_user;
-   \q</code></pre>
+CREATE DATABASE flask_app;
+CREATE USER flask_user WITH PASSWORD 'secure_password';
+ALTER ROLE flask_user SET client_encoding TO 'utf8';
+ALTER ROLE flask_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE flask_user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE flask_app TO flask_user;
+\c flask_app
+GRANT USAGE ON SCHEMA public TO flask_user;
+GRANT CREATE ON SCHEMA public TO flask_user;
+\q</code></pre>
            </li>
            <li>
                <strong>Инициализируйте базу данных</strong>:
@@ -62,7 +62,7 @@
                    </li>
                    <li>Обновите права доступа:
                        <pre><code>sudo chown -R your_username:www-data /home/your_username/flask_project
-   sudo chmod -R 755 /home/your_username/flask_project</code></pre>
+sudo chmod -R 755 /home/your_username/flask_project</code></pre>
                    </li>
                    <li>Отредактируйте <code>gunicorn.service</code>, заменив <code>your_username</code> на ваше имя пользователя, <code>/path/to/flask_project</code> на путь к проекту, и установив переменные <code>DATABASE_URL</code> и <code>SECRET_KEY</code>.</li>
                    <li>Скопируйте <code>gunicorn.service</code> в <code>/etc/systemd/system/</code>:
@@ -70,8 +70,8 @@
                    </li>
                    <li>Активируйте сервис:
                        <pre><code>sudo systemctl daemon-reload
-   sudo systemctl start gunicorn
-   sudo systemctl enable gunicorn</code></pre>
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn</code></pre>
                    </li>
                    <li>Проверьте статус сервиса:
                        <pre><code>sudo systemctl status gunicorn</code></pre>
