@@ -7,7 +7,7 @@
         <h1>Submitted Data</h1>
 	{% for entry in data %}
 	    <pre>{{ entry.data | tojson(indent=2) }}</pre>
-	{% endfor $}
+	{% endfor %}
 	<a href="{{ url_for('main.index') }}">Back to form</a>
     </body>	    
 </html>
