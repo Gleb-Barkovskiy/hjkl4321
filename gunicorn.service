@@ -1,13 +1,15 @@
-[Unit] 
-Description=Gunicorn instance to serve Flask app 
+[Unit]
+Description=Gunicorn instance to serve Flask app
 After=network.target
 
-[Service] 
-User=your_username 
-Group=www-data 
-WorkingDirectory=/path/to/flask_project 
-Environment="PATH=/path/to/flask_project/venv/bin" 
-ExecStart=/path/to/flask_project/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 -m 007 run:app
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/path/to/flask_project
+Environment="PATH=/path/to/flask_project/venv/bin"
+Environment="DATABASE_URL=postgresql://user:pass@localhost/flask_app"
+Environment="SECRET_KEY=your-secure-secret-key"
+ExecStart=/home/ubuntu/flask_project/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 -m 007 run:app
 
-[Install] 
+[Install]
 WantedBy=multi-user.target

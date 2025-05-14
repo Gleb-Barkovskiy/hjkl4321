@@ -2,4 +2,5 @@ venv/
 pycache/
 *.pyc
 .idea/
-*.db 
+*.db
+*.env

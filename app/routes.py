@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, jsonify
 from app import db
 from app.models import FormData
 
+
 bp = Blueprint("main", __name__)
 
 @bp.route("/", methods=["GET", "POST"])
