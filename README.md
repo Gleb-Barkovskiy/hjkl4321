@@ -1,7 +1,7 @@
 <h1>Flask Dynamic Form Project</h1>
     <p>Flask-приложение с динамической формой, сохранением данных в PostgreSQL (JSONB) и отображением сохраненных данных.</p>
-
-  <h2>Требования</h2>
+    
+<h2>Требования</h2>
     <ul>
         <li>Ubuntu 24.04+</li>
         <li>Python 3.10+</li>
@@ -10,12 +10,12 @@
         <li>Gunicorn</li>
     </ul>
 
-  <h2>Установка и развертывание</h2>
+<h2>Установка и развертывание</h2>
     <ol>
         <li>
             <strong>Клонируйте репозиторий</strong>:
-            <pre><code>git clone &lt;repository_url&gt;
-cd flask_project</code></pre>
+            <pre><code>git clone <repository_url>
+cd hjkl4321</code></pre>
         </li>
         <li>
             <strong>Настройте виртуальное окружение</strong>:
@@ -32,6 +32,9 @@ ALTER ROLE flask_user SET client_encoding TO 'utf8';
 ALTER ROLE flask_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE flask_user SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE flask_app TO flask_user;
+\c flask_app
+GRANT USAGE ON SCHEMA public TO flask_user;
+GRANT CREATE ON SCHEMA public TO flask_user;
 \q</code></pre>
         </li>
         <li>
@@ -41,13 +44,27 @@ GRANT ALL PRIVILEGES ON DATABASE flask_app TO flask_user;
         <li>
             <strong>Настройте Gunicorn</strong>:
             <ul>
+                <li>Проверьте имя текущего пользователя:
+                    <pre><code>whoami</code></pre>
+                </li>
+                <li>Убедитесь, что директория проекта доступна (например, <code>/home/your_username/flask_project</code>):
+                    <pre><code>pwd</code></pre>
+                </li>
+                <li>Обновите права доступа:
+                    <pre><code>sudo chown -R your_username:www-data /home/your_username/flask_project
+sudo chmod -R 755 /home/your_username/flask_project</code></pre>
+                </li>
+                <li>Отредактируйте <code>gunicorn.service</code>, заменив <code>your_username</code> на ваше имя пользователя и <code>/path/to/flask_project</code> на путь к проекту (например, <code>/home/your_username/flask_project</code>).</li>
                 <li>Скопируйте <code>gunicorn.service</code> в <code>/etc/systemd/system/</code>:
                     <pre><code>sudo cp gunicorn.service /etc/systemd/system/</code></pre>
                 </li>
-                <li>Замените <code>your_username</code> и <code>/path/to/flask_project</code> на актуальные значения.</li>
                 <li>Активируйте сервис:
-                    <pre><code>sudo systemctl start gunicorn
+                    <pre><code>sudo systemctl daemon-reload
+sudo systemctl start gunicorn
 sudo systemctl enable gunicorn</code></pre>
+                </li>
+                <li>Проверьте статус сервиса:
+                    <pre><code>sudo systemctl status gunicorn</code></pre>
                 </li>
             </ul>
         </li>
@@ -73,7 +90,7 @@ sudo service nginx restart</code></pre>
         </li>
     </ol>
 
-  <h2>Структура проекта</h2>
+<h2>Структура проекта</h2>
     <ul>
         <li><code>app/</code>: Основной код приложения.</li>
         <li><code>templates/</code>: HTML-шаблоны.</li>
